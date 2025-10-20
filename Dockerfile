@@ -42,10 +42,6 @@ WORKDIR /app
 COPY --from=builder /app/.output ./.output
 # Если есть публичные статические файлы вне .output/public — добавь копирование сюда
 
-# Не запускаем от root (безопаснее)
-RUN addgroup -S nodejs && adduser -S node -G nodejs
-USER node
-
 EXPOSE 3000
 
 # Стартуем Nitro-сервер
