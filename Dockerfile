@@ -6,8 +6,9 @@ FROM node:20-alpine AS builder
 # Опционально: избавляемся от ошибок glibc-зависимостей некоторых пакетов
 RUN apk add --no-cache libc6-compat
 
-ENV NODE_ENV=production \
-    NUXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=development \
+    NUXT_TELEMETRY_DISABLED=1 \
+    NPM_CONFIG_PRODUCTION=false
 
 WORKDIR /app
 
@@ -30,6 +31,7 @@ FROM node:20-alpine AS runner
 RUN apk add --no-cache libc6-compat
 
 ENV NODE_ENV=production \
+    NPM_CONFIG_PRODUCTION=true \
     NUXT_TELEMETRY_DISABLED=1 \
     PORT=3000 \
     HOST=0.0.0.0
